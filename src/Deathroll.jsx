@@ -84,6 +84,11 @@ const Deathroll = () => {
         <title itemProp="name" lang="en">
           Two players roll till one reaches 1
         </title>
+
+        <meta
+          name="description"
+          content="Deathroll is a game played by two players. You selected a starting number and both players roll alternately until one reaches 1."
+        />
       </Helmet>
 
       <main>

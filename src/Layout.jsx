@@ -9,9 +9,13 @@ const Layout = () => {
   return (
     <React.Fragment>
       <Helmet
-        defaultTitle="Online automatic dice roller games | DICE GAMES"
-        titleTemplate="%s | DICE GAMES"
-      />
+        defaultTitle="Online automatic dice roller games | ROLL WITH ME"
+        titleTemplate="%s | ROLL WITH ME">
+        <meta
+          name="description"
+          content="Different dice based games like Deathroll you can play one on one or in groups. Every game is optimized to be as easily transparently played as possible."
+        />
+      </Helmet>
 
       <Header />
       <Outlet />

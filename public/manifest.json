@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Roll with Me",
+  "name": "Roll with Me - DICE Games for friends",
+  "description": "Different dice based games like Deathroll you can play one on one or in groups. Every game is optimized to be as easily transparently played as possible.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ca9d9d",
+  "background_color": "#ca9d9d"
 }
