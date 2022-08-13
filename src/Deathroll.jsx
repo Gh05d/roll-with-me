@@ -91,7 +91,7 @@ const Deathroll = () => {
         />
       </Helmet>
 
-      <main>
+      <main id="deathroll">
         <h1>
           Deathroll{" "}
           <span aria-label="skull and dice" role="img">

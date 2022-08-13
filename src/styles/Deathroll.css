@@ -1,4 +1,4 @@
-main {
+#deathroll {
   font-family: sans-serif;
   text-align: center;
   display: flex;
@@ -7,10 +7,6 @@ main {
   justify-content: space-between;
   align-items: center;
   position: relative;
-}
-
-h1 {
-  text-transform: uppercase;
 }
 
 .player-data {

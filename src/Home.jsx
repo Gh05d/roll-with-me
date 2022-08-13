@@ -6,7 +6,12 @@ const Home = () => {
     <main>
       <h1>Dice Games</h1>
       <p>Here are links to all available games:</p>
-      <Link to="deathroll">💀 Death Roll</Link>
+
+      <ul>
+        <li>
+          <Link to="deathroll">💀 Death Roll</Link>
+        </li>
+      </ul>
     </main>
   );
 };
