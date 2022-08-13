@@ -1,6 +1,7 @@
 {
   "name": "dice-games",
   "version": "0.1.0",
+  "homepage": ".",
   "author": {
     "name": "Gh05d"
   },
