@@ -7,7 +7,7 @@ import NotFound from "./NotFound";
 
 const App = () => (
   <Routes>
-    <Route path="/" element={<Layout />}>
+    <Route path="/roll-with-me" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="deathroll" element={<Deathroll />} />
       <Route path="*" element={<NotFound />} />
