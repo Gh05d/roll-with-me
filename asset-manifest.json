@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/roll-with-me/static/css/main.dc31fddb.css",
-    "main.js": "/roll-with-me/static/js/main.2e329959.js",
+    "main.css": "/roll-with-me/static/css/main.32517269.css",
+    "main.js": "/roll-with-me/static/js/main.ac02ea2c.js",
     "static/media/rollwithme-logo.png": "/roll-with-me/static/media/rollwithme-logo.7bfe83ed97fb1215a353.png",
     "index.html": "/roll-with-me/index.html",
-    "main.dc31fddb.css.map": "/roll-with-me/static/css/main.dc31fddb.css.map",
-    "main.2e329959.js.map": "/roll-with-me/static/js/main.2e329959.js.map"
+    "main.32517269.css.map": "/roll-with-me/static/css/main.32517269.css.map",
+    "main.ac02ea2c.js.map": "/roll-with-me/static/js/main.ac02ea2c.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc31fddb.css",
-    "static/js/main.2e329959.js"
+    "static/css/main.32517269.css",
+    "static/js/main.ac02ea2c.js"
   ]
 }
