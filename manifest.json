@@ -1,0 +1,26 @@
+{
+  "short_name": "Roll with Me",
+  "name": "Roll with Me - DICE Games for friends",
+  "description": "Different dice based games like Deathroll you can play one on one or in groups. Every game is optimized to be as easily transparently played as possible.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ca9d9d",
+  "background_color": "#ca9d9d"
+}

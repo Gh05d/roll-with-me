@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Gh05d.github.io/static/css/main.886837fd.css",
+    "main.js": "/Gh05d.github.io/static/js/main.2e329959.js",
+    "static/media/rollwithme-logo.png": "/Gh05d.github.io/static/media/rollwithme-logo.7bfe83ed97fb1215a353.png",
+    "index.html": "/Gh05d.github.io/index.html",
+    "main.886837fd.css.map": "/Gh05d.github.io/static/css/main.886837fd.css.map",
+    "main.2e329959.js.map": "/Gh05d.github.io/static/js/main.2e329959.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.886837fd.css",
+    "static/js/main.2e329959.js"
+  ]
+}
