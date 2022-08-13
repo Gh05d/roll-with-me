@@ -1,0 +1,13 @@
+header {
+  color: black;
+  padding: 10px;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+header > a {
+  color: black;
+}

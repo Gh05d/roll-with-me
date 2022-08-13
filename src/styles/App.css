@@ -1,0 +1,71 @@
+@import url("reset.css");
+
+/* Layout */
+html,
+body {
+  height: 100%;
+}
+
+:root {
+  --background-color: #ca9d9d;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#root > main {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  transition: 300ms ease-in-out;
+  color: #551a8b;
+}
+
+button {
+  width: clamp(6rem, 50%, 12rem);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0;
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgb(217, 198, 198);
+  transition: 300ms ease-in-out;
+}
+
+button:hover,
+button:focus {
+  filter: brightness(70%);
+}
+
+button[disabled] {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+input {
+  max-width: 12rem;
+  padding: 0.5rem;
+}
+
+input:focus {
+  outline: 1px solid red;
+}
