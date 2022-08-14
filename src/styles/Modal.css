@@ -1,6 +1,6 @@
 #modal {
   position: fixed;
-  background-color: white;
+  background-color: var(--background-color);
   width: 50%;
   height: 25%;
   top: 0;

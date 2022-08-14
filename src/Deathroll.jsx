@@ -49,7 +49,7 @@ const Deathroll = () => {
       return (
         <React.Fragment key={`${parsedValue}-${i}`}>
           <span>{parsedValue}</span>
-          {parsedValue == 1 && <span className="looser">Looser</span>}
+          {parsedValue == 1 && <span className="loser">Loser</span>}
         </React.Fragment>
       );
     });
@@ -71,7 +71,7 @@ const Deathroll = () => {
 
   const renderResult = () => {
     return (
-      <div className="result">
+      <div className={`result ${roll == 1 ? "skull" : ""}`}>
         <span>{`${rolls.length % 2 == 0 ? playerTwo : playerOne} rolled`}</span>
         <span>{roll}</span>
       </div>

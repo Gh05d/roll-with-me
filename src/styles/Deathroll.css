@@ -24,10 +24,11 @@
   gap: 8px;
 }
 
-.looser {
+.loser {
   color: red;
   font-weight: bold;
   font-style: italic;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .result {
@@ -35,6 +36,7 @@
   flex-flow: column;
   justify-content: space-around;
   height: 80%;
+  min-width: 75%;
 }
 
 .result > span:first-of-type {
@@ -45,4 +47,23 @@
 .result > span:last-of-type {
   flex: 4;
   font-size: 7rem;
+}
+
+.skull {
+  background-image: url("../images/skull-large.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-size: 7rem 8rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 300ms forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
