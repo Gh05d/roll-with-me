@@ -6,7 +6,7 @@ import "./styles/Header.css";
 const Header = () => (
   <header>
     <div id="logo" />
-    <Link to="/roll-with-me">DICE GAMES</Link>
+    <Link to="/roll-with-me/">DICE GAMES</Link>
   </header>
 );
 
