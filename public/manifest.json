@@ -19,7 +19,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/roll-with-me",
   "display": "standalone",
   "theme_color": "#ca9d9d",
   "background_color": "#ca9d9d"
