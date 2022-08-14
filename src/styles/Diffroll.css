@@ -1,0 +1,21 @@
+#diffroll {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.players {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#diffroll .icon-button {
+  margin-left: 1rem;
+}
+
+.start-button {
+  align-self: center;
+  margin-top: 1rem;
+}

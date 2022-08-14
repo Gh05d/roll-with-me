@@ -69,3 +69,8 @@ input {
 input:focus {
   outline: 1px solid red;
 }
+
+/* Shared classes */
+.icon-button {
+  width: unset;
+}
