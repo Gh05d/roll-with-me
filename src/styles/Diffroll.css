@@ -4,11 +4,16 @@
   justify-content: space-between;
 }
 
-.players {
+.players,
+.numbers {
   display: flex;
   flex: 1;
   flex-direction: column;
   gap: 1rem;
+}
+
+.numbers {
+  flex: 0;
 }
 
 #diffroll .icon-button {

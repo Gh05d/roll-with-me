@@ -6,6 +6,9 @@ import "./styles/Diffroll.css";
 
 const Diffroll = () => {
   const [players, setPlayers] = React.useState({});
+  const [minNumber, setMinNumber] = React.useState(10);
+  const [maxNumber, setMaxNumber] = React.useState(1000);
+  const [started, toggle] = React.useState(false);
 
   React.useState(() => {
     setPlayers(() => {
@@ -67,7 +70,13 @@ const Diffroll = () => {
         <ul className="players">
           {Object.values(players).map((player, i) => (
             <li key={player.id}>
-              <input value={player.name} name={player.id} onChange={handleChange} />
+              <input
+                value={player.name}
+                name={player.id}
+                onChange={handleChange}
+                title="Player name"
+                aria-label="Player name"
+              />
               {i + 1 == Object.values(players).length && (
                 <button
                   title="Add player"
@@ -91,7 +100,28 @@ const Diffroll = () => {
           ))}
         </ul>
 
-        <button className="start-button">Start Game</button>
+        <div className="numbers">
+          <input
+            title="Min number"
+            aria-label="Min number"
+            type="number"
+            min={10}
+            value={minNumber}
+            onChange={e => setMinNumber(e.target.value)}
+          />
+          <input
+            title="Max number"
+            aria-label="Max number"
+            type="number"
+            min={minNumber}
+            value={maxNumber}
+            onChange={e => setMaxNumber(e.target.value)}
+          />
+        </div>
+
+        <button onClick={() => toggle(state => !state)} className="start-button">
+          Start Game
+        </button>
       </main>
     </React.Fragment>
   );

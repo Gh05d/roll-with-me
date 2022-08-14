@@ -58,6 +58,8 @@ const Deathroll = () => {
   const renderPlayerData = (name, mode, onChange) => (
     <div className="player-data">
       <input
+        title="Player name"
+        aria-label="Player name"
         disabled={rolls.length}
         value={name}
         onChange={e => onChange(e.target.value)}
