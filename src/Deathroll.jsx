@@ -109,6 +109,7 @@ const Deathroll = () => {
           disabled={rolls.length}
           onChange={handleChange}
           value={roll}
+          step={10}
           type="number"
         />
 

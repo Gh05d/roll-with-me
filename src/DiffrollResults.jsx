@@ -2,6 +2,33 @@ import React from "react";
 import { generateID } from "./helpers";
 
 const DiffrollResult = ({ players, maxNumber, minNumber }) => {
+  const [results, setResults] = React.useState({});
+  const [highest, setHighest] = React.useState(0);
+  const [lowest, setLowest] = React.useState(0);
+
+  React.useEffect(() => {
+    function rollDice() {
+      return Math.floor(Math.random() * (+maxNumber - +minNumber + 1)) + +minNumber;
+    }
+
+    let highestRoll = minNumber;
+    let lowestRoll = maxNumber;
+
+    const rolls = Object.values(players).reduce((acc, cV) => {
+      const roll = rollDice();
+      acc[cV.id] = roll;
+
+      if (roll > highestRoll) highestRoll = roll;
+      if (roll < lowestRoll) lowestRoll = roll;
+
+      return acc;
+    }, {});
+
+    setResults(rolls);
+    setHighest(highestRoll);
+    setLowest(lowestRoll);
+  }, [players, maxNumber, minNumber]);
+
   const rollAnimation = [
     {
       transform: "perspective(none) rotate(0deg) translateZ(10rem)",
@@ -28,7 +55,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
 
   const opacityAnimation = [
     { opacity: 0 },
-    { opacity: 0.4, offset: 0.9 },
+    { opacity: 0.1, offset: 0.9 },
     { opacity: 1 },
   ];
 
@@ -38,13 +65,34 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
     easing: "ease-in-out",
   };
 
-  const rollDice = () => Math.floor(Math.random() * maxNumber - minNumber);
+  function createAnimation(color) {
+    return [
+      { backgroundColor: "white" },
+      { backgroundColor: color, padding: "0.5rem 0" },
+    ];
+  }
 
   return (
     <div id="diffroll-game">
       {Object.values(players).map((player, i) => (
-        <div key={generateID(player.name)} className="player-row">
+        <div
+          key={generateID(player.name)}
+          ref={el =>
+            results[player.id] == highest
+              ? el?.animate(createAnimation("gold"), {
+                  ...opacityAnimationConfig,
+                  delay: Object.values(players).length * 1200,
+                })
+              : results[player.id] == lowest
+              ? el?.animate(createAnimation("brown"), {
+                  ...opacityAnimationConfig,
+                  delay: Object.values(players).length * 1200,
+                })
+              : null
+          }
+          className="player-row">
           <span>{player.name}</span>
+
           <i
             className="fa fa-dice-d20"
             ref={el =>
@@ -54,6 +102,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
               })
             }
           />
+
           <span
             className="dice-result"
             ref={el =>
@@ -62,7 +111,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
                 delay: i * 1200,
               })
             }>
-            {rollDice()}
+            {results[player.id]}
           </span>
         </div>
       ))}

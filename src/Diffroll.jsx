@@ -108,6 +108,7 @@ const Diffroll = () => {
               <input
                 title="Min number"
                 aria-label="Min number"
+                step={10}
                 type="number"
                 min={10}
                 value={minNumber}
@@ -116,18 +117,19 @@ const Diffroll = () => {
               <input
                 title="Max number"
                 aria-label="Max number"
+                step={10}
                 type="number"
                 min={minNumber}
                 value={maxNumber}
                 onChange={e => setMaxNumber(e.target.value)}
               />
             </div>
-
-            <button onClick={() => toggle(state => !state)} className="start-button">
-              Start Game
-            </button>
           </div>
         )}
+
+        <button onClick={() => toggle(state => !state)} className="start-button">
+          {started ? "Restart Game" : "Start Game"}
+        </button>
       </main>
     </React.Fragment>
   );
