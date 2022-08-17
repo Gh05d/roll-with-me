@@ -2,6 +2,10 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import generateName from "sillyname";
 
+import DiffrollResult from "./DiffrollResults";
+
+import { generateID } from "./helpers";
+
 import "./styles/Diffroll.css";
 
 const Diffroll = () => {
@@ -21,10 +25,6 @@ const Diffroll = () => {
       };
     });
   }, []);
-
-  function generateID() {
-    return (Math.random() + 1).toString(36).slice(2, 10);
-  }
 
   function handleChange(e) {
     const id = e.target.name;
@@ -67,61 +67,67 @@ const Diffroll = () => {
       <main id="diffroll">
         <h1>Diffroll</h1>
 
-        <ul className="players">
-          {Object.values(players).map((player, i) => (
-            <li key={player.id}>
+        {started ? (
+          <DiffrollResult maxNumber={maxNumber} minNumber={minNumber} players={players} />
+        ) : (
+          <div id="diffroll-setup">
+            <ul className="players">
+              {Object.values(players).map((player, i) => (
+                <li key={player.id}>
+                  <input
+                    value={player.name}
+                    name={player.id}
+                    onChange={handleChange}
+                    title="Player name"
+                    aria-label="Player name"
+                  />
+                  {i + 1 == Object.values(players).length && (
+                    <button
+                      title="Add player"
+                      onClick={addPlayer}
+                      aria-label="Add player"
+                      className="icon-button">
+                      <i className="fa fa-user-plus" />
+                    </button>
+                  )}
+
+                  {i > 1 && (
+                    <button
+                      title={`Remove ${player.name}`}
+                      onClick={() => removePlayer(player.id)}
+                      aria-label={`Remove ${player.name}`}
+                      className="icon-button">
+                      <i className="fa fa-user-minus" />
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <div className="numbers">
               <input
-                value={player.name}
-                name={player.id}
-                onChange={handleChange}
-                title="Player name"
-                aria-label="Player name"
+                title="Min number"
+                aria-label="Min number"
+                type="number"
+                min={10}
+                value={minNumber}
+                onChange={e => setMinNumber(e.target.value)}
               />
-              {i + 1 == Object.values(players).length && (
-                <button
-                  title="Add player"
-                  onClick={addPlayer}
-                  aria-label="Add player"
-                  className="icon-button">
-                  <i className="fa fa-user-plus" />
-                </button>
-              )}
+              <input
+                title="Max number"
+                aria-label="Max number"
+                type="number"
+                min={minNumber}
+                value={maxNumber}
+                onChange={e => setMaxNumber(e.target.value)}
+              />
+            </div>
 
-              {i > 1 && (
-                <button
-                  title={`Remove ${player.name}`}
-                  onClick={() => removePlayer(player.id)}
-                  aria-label={`Remove ${player.name}`}
-                  className="icon-button">
-                  <i className="fa fa-user-minus" />
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        <div className="numbers">
-          <input
-            title="Min number"
-            aria-label="Min number"
-            type="number"
-            min={10}
-            value={minNumber}
-            onChange={e => setMinNumber(e.target.value)}
-          />
-          <input
-            title="Max number"
-            aria-label="Max number"
-            type="number"
-            min={minNumber}
-            value={maxNumber}
-            onChange={e => setMaxNumber(e.target.value)}
-          />
-        </div>
-
-        <button onClick={() => toggle(state => !state)} className="start-button">
-          Start Game
-        </button>
+            <button onClick={() => toggle(state => !state)} className="start-button">
+              Start Game
+            </button>
+          </div>
+        )}
       </main>
     </React.Fragment>
   );

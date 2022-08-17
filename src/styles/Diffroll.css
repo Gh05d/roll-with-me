@@ -24,3 +24,20 @@
   align-self: center;
   margin-top: 1rem;
 }
+
+#diffroll-game,
+#diffroll-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+#diffroll-game .player-row {
+  display: flex;
+  gap: 1rem;
+}
+
+#diffroll-game .dice-result {
+  opacity: 0;
+}
