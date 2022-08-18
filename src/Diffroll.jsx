@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import generateName from "sillyname";
+import DiffrollResultModal from "./DiffrollResultModal";
 
 import DiffrollResult from "./DiffrollResults";
 
@@ -13,6 +14,8 @@ const Diffroll = () => {
   const [minNumber, setMinNumber] = React.useState(10);
   const [maxNumber, setMaxNumber] = React.useState(1000);
   const [started, toggle] = React.useState(false);
+  const [show, setModal] = React.useState(false);
+  const [decision, setDecision] = React.useState(null);
 
   React.useState(() => {
     setPlayers(() => {
@@ -51,11 +54,28 @@ const Diffroll = () => {
     });
   }
 
+  function renderResult({ winners, losers, highest, lowest }) {
+    setModal(true);
+    setDecision({
+      winner: winners[0].name,
+      loser: losers[0].name,
+      amount: highest - lowest,
+      highest,
+      lowest,
+    });
+  }
+
+  const showResult = React.useCallback(({ winners, losers, highest, lowest }) => {
+    renderResult({ winners, losers, highest, lowest });
+  }, []);
+
+  const currentPlayers = React.useCallback(() => players, [players]);
+
   return (
     <React.Fragment>
       <Helmet>
         <title itemProp="name" lang="en">
-          Many player with the hightest number wins
+          The player with the highest number wins
         </title>
 
         <meta
@@ -68,7 +88,12 @@ const Diffroll = () => {
         <h1>Diffroll</h1>
 
         {started ? (
-          <DiffrollResult maxNumber={maxNumber} minNumber={minNumber} players={players} />
+          <DiffrollResult
+            maxNumber={maxNumber}
+            minNumber={minNumber}
+            players={currentPlayers()}
+            renderResult={showResult}
+          />
         ) : (
           <div id="diffroll-setup">
             <ul className="players">
@@ -130,6 +155,16 @@ const Diffroll = () => {
         <button onClick={() => toggle(state => !state)} className="start-button">
           {started ? "Restart Game" : "Start Game"}
         </button>
+
+        {show && (
+          <DiffrollResultModal
+            decision={decision}
+            close={() => {
+              setModal(false);
+              toggle(false);
+            }}
+          />
+        )}
       </main>
     </React.Fragment>
   );

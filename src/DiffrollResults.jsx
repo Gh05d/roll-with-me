@@ -1,20 +1,23 @@
 import React from "react";
 import { generateID } from "./helpers";
 
-const DiffrollResult = ({ players, maxNumber, minNumber }) => {
+const DiffrollResult = ({ players, maxNumber, minNumber, renderResult }) => {
   const [results, setResults] = React.useState({});
   const [highest, setHighest] = React.useState(0);
   const [lowest, setLowest] = React.useState(0);
+  const animationDuration = 600;
 
   React.useEffect(() => {
     function rollDice() {
       return Math.floor(Math.random() * (+maxNumber - +minNumber + 1)) + +minNumber;
     }
 
+    const playersArray = Object.values(players);
+
     let highestRoll = minNumber;
     let lowestRoll = maxNumber;
 
-    const rolls = Object.values(players).reduce((acc, cV) => {
+    const rolls = playersArray.reduce((acc, cV) => {
       const roll = rollDice();
       acc[cV.id] = roll;
 
@@ -27,7 +30,19 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
     setResults(rolls);
     setHighest(highestRoll);
     setLowest(lowestRoll);
-  }, [players, maxNumber, minNumber]);
+
+    setTimeout(() => {
+      const winners = [];
+      const losers = [];
+
+      for (const player of playersArray) {
+        if (rolls[player.id] == highestRoll) winners.push(player);
+        if (rolls[player.id] == lowestRoll) losers.push(player);
+      }
+
+      renderResult({ winners, losers, highest: highestRoll, lowest: lowestRoll });
+    }, playersArray.length * animationDuration * 2 + animationDuration);
+  }, []);
 
   const rollAnimation = [
     {
@@ -47,7 +62,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
   ];
 
   const animationConfig = {
-    duration: 600,
+    duration: animationDuration,
     iterations: 2,
     easing: "ease-in-out",
     fill: "forwards",
@@ -60,7 +75,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
   ];
 
   const opacityAnimationConfig = {
-    duration: 1200,
+    duration: animationDuration * 2,
     fill: "forwards",
     easing: "ease-in-out",
   };
@@ -81,12 +96,12 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
             results[player.id] == highest
               ? el?.animate(createAnimation("gold"), {
                   ...opacityAnimationConfig,
-                  delay: Object.values(players).length * 1200,
+                  delay: Object.values(players).length * animationDuration * 2,
                 })
               : results[player.id] == lowest
               ? el?.animate(createAnimation("brown"), {
                   ...opacityAnimationConfig,
-                  delay: Object.values(players).length * 1200,
+                  delay: Object.values(players).length * animationDuration * 2,
                 })
               : null
           }
@@ -98,7 +113,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
             ref={el =>
               el?.animate(rollAnimation, {
                 ...animationConfig,
-                delay: i * 2 * 600,
+                delay: i * 2 * animationDuration,
               })
             }
           />
@@ -108,7 +123,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
             ref={el =>
               el?.animate(opacityAnimation, {
                 ...opacityAnimationConfig,
-                delay: i * 1200,
+                delay: i * animationDuration * 2,
               })
             }>
             {results[player.id]}
@@ -119,4 +134,4 @@ const DiffrollResult = ({ players, maxNumber, minNumber }) => {
   );
 };
 
-export default DiffrollResult;
+export default React.memo(DiffrollResult);
