@@ -17,7 +17,7 @@ const DiffrollResultModal = ({ close, decision }) => {
         <div id="diffroll-result">
           <b>{decision.loser} 💩</b>
           <span> has to to pay </span>
-          <b>{computeAmount()} €</b>
+          <b>{computeAmount()} 💶</b>
           <span> to </span>
           <b>{decision.winner} 👑</b>
         </div>
