@@ -9,25 +9,32 @@ import { generateID } from "./helpers";
 
 import "./styles/Diffroll.css";
 
+const DEFAULT_MIN = 1;
+const DEFAULT_MAX = 1000;
+
 const Diffroll = () => {
   const [players, setPlayers] = React.useState({});
-  const [minNumber, setMinNumber] = React.useState(10);
-  const [maxNumber, setMaxNumber] = React.useState(1000);
+  const [minNumber, setMinNumber] = React.useState(DEFAULT_MIN);
+  const [maxNumber, setMaxNumber] = React.useState(DEFAULT_MAX);
   const [started, toggle] = React.useState(false);
   const [show, setModal] = React.useState(false);
   const [decision, setDecision] = React.useState(null);
+  const [results, setResults] = React.useState(null);
 
-  React.useState(() => {
+  React.useState(setDefaultPlayers, []);
+  const animationDuration = 600;
+
+  function setDefaultPlayers() {
     setPlayers(() => {
       const id1 = generateID();
       const id2 = generateID();
 
       return {
-        [id1]: { name: "Dommi Doppelkinn", id: id1 },
-        [id2]: { name: "Weasel Müller", id: id2 },
+        [id1]: { name: "Triggerhappy Dommez", id: id1 },
+        [id2]: { name: "This is no original Philly Steak - Müller", id: id2 },
       };
     });
-  }, []);
+  }
 
   function handleChange(e) {
     const id = e.target.name;
@@ -54,20 +61,60 @@ const Diffroll = () => {
     });
   }
 
-  function renderResult({ winners, losers, highest, lowest }) {
-    setModal(true);
-    setDecision({
-      winner: winners[0].name,
-      loser: losers[0].name,
-      amount: highest - lowest,
-      highest,
-      lowest,
-    });
+  function rollDice() {
+    return Math.floor(Math.random() * (+maxNumber - +minNumber + 1)) + +minNumber;
   }
 
-  const showResult = React.useCallback(({ winners, losers, highest, lowest }) => {
-    renderResult({ winners, losers, highest, lowest });
-  }, []);
+  const startGame = () => {
+    const playersArray = Object.values(players);
+
+    let highestRoll = +minNumber;
+    let lowestRoll = +maxNumber;
+
+    const rolls = playersArray.reduce((acc, cV) => {
+      const roll = rollDice();
+      acc[cV.id] = roll;
+
+      if (roll > highestRoll) highestRoll = roll;
+      if (roll < lowestRoll) lowestRoll = roll;
+
+      return acc;
+    }, {});
+    const winners = [];
+    const losers = [];
+
+    for (const player of playersArray) {
+      if (rolls[player.id] == highestRoll) winners.push(player);
+      if (rolls[player.id] == lowestRoll) losers.push(player);
+    }
+    console.log("FIRE ~ file: Diffroll.jsx ~ line 88 ~ startGame ~ rolls", rolls);
+
+    setResults(state => {
+      const clone = state ? { ...state } : {};
+      console.log("FIRE ~ file: Diffroll.jsx ~ line 69 ~ renderResult ~ clone", clone);
+
+      Object.keys(rolls).forEach(playerID => {
+        clone[playerID] = !clone[playerID]
+          ? [rolls[playerID]]
+          : [...clone[playerID], rolls[playerID]];
+      });
+      console.log(" ~ updatedResults", clone);
+
+      return clone;
+    });
+
+    setDecision({
+      winner: winners[0]?.name,
+      loser: losers[0]?.name,
+      amount: highestRoll - lowestRoll,
+      highest: highestRoll,
+      lowest: lowestRoll,
+    });
+    toggle(true);
+    setTimeout(() => {
+      setModal(true);
+    }, playersArray.length * animationDuration * 2 + animationDuration);
+  };
 
   const currentPlayers = React.useCallback(() => players, [players]);
 
@@ -89,10 +136,9 @@ const Diffroll = () => {
 
         {started ? (
           <DiffrollResult
-            maxNumber={maxNumber}
-            minNumber={minNumber}
+            animationDuration={animationDuration}
             players={currentPlayers()}
-            renderResult={showResult}
+            results={results}
           />
         ) : (
           <div id="diffroll-setup">
@@ -133,9 +179,9 @@ const Diffroll = () => {
               <input
                 title="Min number"
                 aria-label="Min number"
-                step={10}
+                step={1}
                 type="number"
-                min={10}
+                min={1}
                 value={minNumber}
                 onChange={e => setMinNumber(e.target.value)}
               />
@@ -149,12 +195,26 @@ const Diffroll = () => {
                 onChange={e => setMaxNumber(e.target.value)}
               />
             </div>
+
+            <div className="buttons">
+              <button onClick={startGame} className="start-button">
+                Start Game
+              </button>
+
+              <button
+                onClick={() => {
+                  setDefaultPlayers();
+                  setResults(null);
+                  setDecision(null);
+                  setMinNumber(DEFAULT_MIN);
+                  setMaxNumber(DEFAULT_MAX);
+                }}
+                className="start-button">
+                Reset
+              </button>
+            </div>
           </div>
         )}
-
-        <button onClick={() => toggle(state => !state)} className="start-button">
-          {started ? "Restart Game" : "Start Game"}
-        </button>
 
         {show && (
           <DiffrollResultModal

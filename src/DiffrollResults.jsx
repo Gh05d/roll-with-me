@@ -1,48 +1,23 @@
 import React from "react";
 import { generateID } from "./helpers";
 
-const DiffrollResult = ({ players, maxNumber, minNumber, renderResult }) => {
-  const [results, setResults] = React.useState({});
-  const [highest, setHighest] = React.useState(0);
-  const [lowest, setLowest] = React.useState(0);
-  const animationDuration = 600;
+const DiffrollResult = ({ players, results, animationDuration }) => {
+  console.log(
+    "FIRE ~ file: DiffrollResults.jsx ~ line 5 ~ DiffrollResult ~ results",
+    results
+  );
+  let highestRoll;
+  let lowestRoll;
 
-  React.useEffect(() => {
-    function rollDice() {
-      return Math.floor(Math.random() * (+maxNumber - +minNumber + 1)) + +minNumber;
+  for (const result of Object.values(results)) {
+    if (!highestRoll || result[result.length - 1] > highestRoll) {
+      highestRoll = result[result.length - 1];
     }
 
-    const playersArray = Object.values(players);
-
-    let highestRoll = minNumber;
-    let lowestRoll = maxNumber;
-
-    const rolls = playersArray.reduce((acc, cV) => {
-      const roll = rollDice();
-      acc[cV.id] = roll;
-
-      if (roll > highestRoll) highestRoll = roll;
-      if (roll < lowestRoll) lowestRoll = roll;
-
-      return acc;
-    }, {});
-
-    setResults(rolls);
-    setHighest(highestRoll);
-    setLowest(lowestRoll);
-
-    setTimeout(() => {
-      const winners = [];
-      const losers = [];
-
-      for (const player of playersArray) {
-        if (rolls[player.id] == highestRoll) winners.push(player);
-        if (rolls[player.id] == lowestRoll) losers.push(player);
-      }
-
-      renderResult({ winners, losers, highest: highestRoll, lowest: lowestRoll });
-    }, playersArray.length * animationDuration * 2 + animationDuration);
-  }, []);
+    if (!lowestRoll || result[result.length - 1] < lowestRoll) {
+      lowestRoll = result[result.length - 1];
+    }
+  }
 
   const rollAnimation = [
     {
@@ -93,12 +68,12 @@ const DiffrollResult = ({ players, maxNumber, minNumber, renderResult }) => {
         <div
           key={generateID(player.name)}
           ref={el =>
-            results[player.id] == highest
+            results[player.id][results[player.id].length - 1] == highestRoll
               ? el?.animate(createAnimation("gold"), {
                   ...opacityAnimationConfig,
                   delay: Object.values(players).length * animationDuration * 2,
                 })
-              : results[player.id] == lowest
+              : results[player.id][results[player.id].length - 1] == lowestRoll
               ? el?.animate(createAnimation("brown"), {
                   ...opacityAnimationConfig,
                   delay: Object.values(players).length * animationDuration * 2,
@@ -126,7 +101,7 @@ const DiffrollResult = ({ players, maxNumber, minNumber, renderResult }) => {
                 delay: i * animationDuration * 2,
               })
             }>
-            {results[player.id]}
+            {results[player.id][results[player.id].length - 1]}
           </span>
         </div>
       ))}

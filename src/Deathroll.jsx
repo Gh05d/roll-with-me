@@ -8,8 +8,8 @@ import "./styles/Deathroll.css";
 const DEFAULT_VALUE = 100;
 
 const Deathroll = () => {
-  const [playerOne, setPlayerOne] = React.useState("Dommi Doppelkinn");
-  const [playerTwo, setPlayerTwo] = React.useState("Weasel Müller");
+  const [playerOne, setPlayerOne] = React.useState("Triggerhappy Dommez");
+  const [playerTwo, setPlayerTwo] = React.useState("Your food sucks - Müller");
 
   const [show, toggle] = React.useState(false);
   const [roll, setRoll] = React.useState(DEFAULT_VALUE);

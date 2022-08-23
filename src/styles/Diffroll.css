@@ -20,6 +20,11 @@
   margin-left: 1rem;
 }
 
+#diffroll .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .start-button {
   align-self: center;
   margin-top: 1rem;
