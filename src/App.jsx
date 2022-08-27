@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 
 import Layout from "./Layout";
-import Home from "./Home";
-import Deathroll from "./Deathroll";
-import NotFound from "./NotFound";
-import Diffroll from "./Diffroll";
+import Home from "./pages/Home";
+import Deathroll from "./pages/Deathroll";
+import NotFound from "./pages/NotFound";
+import Diffroll from "./pages/Diffroll";
 
 const App = () => (
   <Routes>

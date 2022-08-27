@@ -1,9 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 
-import "./styles/Deathroll.css";
+import "../styles/Deathroll.css";
 
 const DEFAULT_VALUE = 100;
 

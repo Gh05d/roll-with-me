@@ -74,3 +74,28 @@ input:focus {
 .icon-button {
   width: unset;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.skull,
+.trophy {
+  background-image: url("../images/skull-large.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-size: 7rem 8rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 300ms forwards;
+}
+
+.trophy {
+  background-image: url("../images/win.png");
+  filter: opacity(50%);
+}

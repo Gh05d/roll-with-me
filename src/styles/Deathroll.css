@@ -48,22 +48,3 @@
   flex: 4;
   font-size: 7rem;
 }
-
-.skull {
-  background-image: url("../images/skull-large.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-size: 7rem 8rem;
-  opacity: 0;
-  animation: fadeIn 1s ease-in-out 300ms forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./styles/Footer.css";
+import "../styles/Footer.css";
 
 const Footer = () => {
   const socialIcons = [
@@ -18,11 +18,20 @@ const Footer = () => {
   ];
 
   return (
-    <footer>
+    <footer id="footer">
       <div>
-        <span>Created by </span>
-        <a className="fancy-link" href="https://github.com/Gh05d">
-          Gh05d
+        <div>
+          <span>Created by </span>
+          <a className="fancy-link" href="https://github.com/Gh05d">
+            Gh05d
+          </a>
+        </div>
+
+        <a
+          className="attribution"
+          href="https://www.flaticon.com/free-icons/trophy"
+          title="trophy icons">
+          Trophy icons created by Freepik - Flaticon
         </a>
       </div>
 

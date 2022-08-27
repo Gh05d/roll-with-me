@@ -3,7 +3,7 @@
   background-color: var(--background-color);
   align-self: center;
   min-width: 50%;
-  height: 25%;
+  min-height: 25%;
   top: 0;
   box-shadow: 2px 2px 2px black;
   display: flex;

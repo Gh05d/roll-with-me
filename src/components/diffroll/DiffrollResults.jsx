@@ -1,11 +1,7 @@
 import React from "react";
-import { generateID } from "./helpers";
+import { generateID } from "../../helpers";
 
 const DiffrollResult = ({ players, results, animationDuration }) => {
-  console.log(
-    "FIRE ~ file: DiffrollResults.jsx ~ line 5 ~ DiffrollResult ~ results",
-    results
-  );
   let highestRoll;
   let lowestRoll;
 
