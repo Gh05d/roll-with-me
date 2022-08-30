@@ -16,8 +16,18 @@
   flex: 0;
 }
 
-#diffroll .icon-button {
-  margin-left: 1rem;
+.players > li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fa-coins.positive {
+  color: rgb(239, 207, 20);
+}
+
+.fa-coins.negative {
+  color: rgb(179, 3, 3);
 }
 
 #diffroll .buttons {
@@ -45,4 +55,18 @@
 
 #diffroll-game .dice-result {
   opacity: 0;
+}
+
+#diffroll .diffroll-confirm-modal {
+  padding: 1rem 1rem 0;
+  flex-direction: column;
+}
+
+#diffroll .diffroll-confirm-modal div {
+  margin: 1rem 0;
+}
+
+#diffroll .diffroll-confirm-modal .buttons {
+  width: 100%;
+  gap: 1rem;
 }

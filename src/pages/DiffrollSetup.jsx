@@ -5,10 +5,12 @@ import "../styles/Diffroll.css";
 const DiffrollSetup = props => {
   const { players, addPlayer, minNumber, removePlayer } = props;
 
+  const playersArray = Object.values(players);
+
   return (
     <div id="diffroll-setup">
       <ul className="players">
-        {Object.values(players).map((player, i) => (
+        {playersArray.map((player, i) => (
           <li key={player.id}>
             <input
               value={player.name}
@@ -17,23 +19,32 @@ const DiffrollSetup = props => {
               title="Player name"
               aria-label="Player name"
             />
-            {i + 1 == Object.values(players).length && (
-              <button
-                title="Add player"
-                onClick={addPlayer}
-                aria-label="Add player"
-                className="icon-button">
-                <i className="fa fa-user-plus" />
-              </button>
-            )}
 
-            {i > 1 && (
+            <div>
+              {player.balance}{" "}
+              <i
+                className={`fa-solid fa-coins ${
+                  player.balance > 0 ? "positive" : player.balance < 0 ? "negative" : ""
+                }`}></i>
+            </div>
+
+            {playersArray.length > 1 && (
               <button
                 title={`Remove ${player.name}`}
                 onClick={() => removePlayer(player.id)}
                 aria-label={`Remove ${player.name}`}
                 className="icon-button">
                 <i className="fa fa-user-minus" />
+              </button>
+            )}
+
+            {i + 1 == playersArray.length && (
+              <button
+                title="Add player"
+                onClick={addPlayer}
+                aria-label="Add player"
+                className="icon-button">
+                <i className="fa fa-user-plus" />
               </button>
             )}
           </li>
@@ -62,7 +73,10 @@ const DiffrollSetup = props => {
       </div>
 
       <div className="buttons">
-        <button onClick={props.startGame} className="start-button">
+        <button
+          disabled={playersArray.length <= 1}
+          onClick={props.startGame}
+          className="start-button">
           Start Game
         </button>
 

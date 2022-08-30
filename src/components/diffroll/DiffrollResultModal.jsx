@@ -11,15 +11,9 @@ const DiffrollResultModal = ({ close, winners, losers, amount, highest, lowest }
   React.useEffect(() => {
     if (winners.length == 1) setWinner(winners[0]);
     if (losers.length == 1) setLoser(losers[0]);
-    console.log("FIRE ONCE");
   }, []);
 
-  function computeAmount() {
-    const euro = Math.floor(amount / 100);
-    const cent = amount % 100;
-
-    return `${highest} - ${lowest} = ${amount} / 100 = ${euro},${cent}`;
-  }
+  const onClose = () => close({ winner, loser });
 
   function render() {
     if (winner && loser) {
@@ -27,21 +21,20 @@ const DiffrollResultModal = ({ close, winners, losers, amount, highest, lowest }
         <React.Fragment>
           <b>{loser.name} 💩</b>
           <span> has to pay </span>
-          <b>{computeAmount()} 💶</b>
+          <b>
+            {`${highest} - ${lowest} = ${amount}`} <i className="fa-solid fa-coins" />
+          </b>
           <span> to </span>
           <b>{winner.name} 👑</b>
 
-          <button onClick={close}>OK</button>
+          <button onClick={onClose}>OK</button>
         </React.Fragment>
       );
     }
 
-    console.log({ winner });
     if (!winner) {
       return <TieBreaker list={winners} forWin onClick={person => setWinner(person)} />;
     }
-
-    console.log({ loser });
 
     if (!loser) {
       return (
@@ -57,7 +50,7 @@ const DiffrollResultModal = ({ close, winners, losers, amount, highest, lowest }
   }
 
   return (
-    <Modal noCloseOverlay noCloseClick close={close}>
+    <Modal noCloseOverlay noCloseClick close={onClose}>
       <div id="diffroll-result">{render()}</div>
     </Modal>
   );
