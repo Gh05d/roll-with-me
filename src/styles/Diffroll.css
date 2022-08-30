@@ -1,4 +1,6 @@
 #diffroll {
+  --animation-duration: 600ms;
+  --animation-repeat: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,6 +24,10 @@
   gap: 1rem;
 }
 
+#diffroll-setup .players .remove-player {
+  margin-left: auto;
+}
+
 .fa-coins.positive {
   color: rgb(239, 207, 20);
 }
@@ -40,7 +46,7 @@
   margin-top: 1rem;
 }
 
-#diffroll-game,
+.diffroll-game,
 #diffroll-setup {
   display: flex;
   flex-direction: column;
@@ -48,12 +54,12 @@
   flex: 1;
 }
 
-#diffroll-game .player-row {
+.diffroll-game .player-row {
   display: flex;
   gap: 1rem;
 }
 
-#diffroll-game .dice-result {
+.diffroll-game .dice-result {
   opacity: 0;
 }
 
@@ -69,4 +75,33 @@
 #diffroll .diffroll-confirm-modal .buttons {
   width: 100%;
   gap: 1rem;
+}
+
+.diffroll-game .show-roll {
+  animation: roll var(--animation-duration) ease-in-out var(--animation-repeat) forwards;
+}
+
+.diffroll-game .show-roll-result {
+  opacity: 0;
+  animation: fadeIn var(--animation-duration) ease-in-out
+    calc(var(--animation-duration) * var(--animation-repeat)) forwards;
+}
+
+#diffroll-game-manual > button {
+  margin-top: auto;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.highlight-winner,
+.highlight-loser {
+  animation-name: highlightWinner;
+  animation-duration: var(--animation-duration);
+  animation-timing-function: ease-in-out;
+  animation-delay: calc(var(--animation-duration) * var(--animation-repeat));
+  animation-fill-mode: forwards;
+}
+
+.highlight-loser {
+  animation-name: highlightLoser;
 }

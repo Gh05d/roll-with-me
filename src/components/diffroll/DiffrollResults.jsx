@@ -1,19 +1,8 @@
 import React from "react";
-import { generateID } from "../../helpers";
+import { generateID, getResults } from "../../helpers";
 
 const DiffrollResult = ({ players, results, animationDuration }) => {
-  let highestRoll;
-  let lowestRoll;
-
-  for (const result of Object.values(results)) {
-    if (!highestRoll || result[result.length - 1] > highestRoll) {
-      highestRoll = result[result.length - 1];
-    }
-
-    if (!lowestRoll || result[result.length - 1] < lowestRoll) {
-      lowestRoll = result[result.length - 1];
-    }
-  }
+  const { highestRoll, lowestRoll } = getResults(results);
 
   const rollAnimation = [
     {
@@ -59,7 +48,7 @@ const DiffrollResult = ({ players, results, animationDuration }) => {
   }
 
   return (
-    <div id="diffroll-game">
+    <div className="diffroll-game">
       {Object.values(players).map((player, i) => (
         <div
           key={generateID(player.name)}

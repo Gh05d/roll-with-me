@@ -3,12 +3,13 @@ import { Helmet } from "react-helmet";
 import generateName from "sillyname";
 
 import DiffrollResultModal from "../components/diffroll/DiffrollResultModal";
-import DiffrollResult from "../components/diffroll/DiffrollResults";
+import DiffrollResults from "../components/diffroll/DiffrollResults";
 import DiffrollSetup from "./DiffrollSetup";
 
 import "../styles/Diffroll.css";
 import { generateID } from "../helpers";
 import Modal from "../components/Modal";
+import DiffrollManual from "../components/diffroll/DiffrollManual";
 
 const DEFAULT_MIN = 1;
 const DEFAULT_MAX = 1000;
@@ -17,6 +18,7 @@ const Diffroll = () => {
   const [players, setPlayers] = React.useState({});
   const [minNumber, setMinNumber] = React.useState(DEFAULT_MIN);
   const [maxNumber, setMaxNumber] = React.useState(DEFAULT_MAX);
+  const [automatic, toggleMode] = React.useState(false);
 
   const [started, toggle] = React.useState(false);
   const [showDecision, toggleDecision] = React.useState(false);
@@ -73,10 +75,13 @@ const Diffroll = () => {
       lowest: lowestRoll,
     });
     toggle(true);
-    setTimeout(
-      () => toggleDecision(true),
-      playersArray.length * animationDuration * 2 + animationDuration
-    );
+
+    if (automatic) {
+      setTimeout(
+        () => toggleDecision(true),
+        playersArray.length * animationDuration * 2 + animationDuration
+      );
+    }
   }
 
   function reset() {
@@ -161,13 +166,23 @@ const Diffroll = () => {
         <h1>Diffroll</h1>
 
         {started ? (
-          <DiffrollResult
-            animationDuration={animationDuration}
-            players={currentPlayers()}
-            results={results}
-          />
+          automatic ? (
+            <DiffrollResults
+              animationDuration={animationDuration}
+              players={currentPlayers()}
+              results={results}
+            />
+          ) : (
+            <DiffrollManual
+              finish={() => toggleDecision(true)}
+              players={currentPlayers()}
+              results={results}
+            />
+          )
         ) : (
           <DiffrollSetup
+            toggleMode={toggleMode}
+            automatic={automatic}
             players={players}
             addPlayer={addPlayer}
             removePlayer={removePlayer}

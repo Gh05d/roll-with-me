@@ -99,3 +99,44 @@ input:focus {
   background-image: url("../images/win.png");
   filter: opacity(50%);
 }
+
+@keyframes roll {
+  0% {
+    opacity: 0;
+    transform: perspective(none) rotate(0deg) translateZ(10rem);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: perspective(40rem) rotate(240deg) translateZ(5rem);
+  }
+  80% {
+    transform: perspective(none) rotate(360deg) translateZ(3rem);
+  }
+  100% {
+    transform: perspective(none) rotate(330deg) translateZ(7rem);
+  }
+}
+
+@keyframes highlightWinner {
+  from {
+    background-color: white;
+    padding: 0;
+  }
+  to {
+    background-color: gold;
+    padding: 0.5rem 0;
+  }
+}
+
+@keyframes highlightLoser {
+  from {
+    background-color: white;
+    padding: 0;
+  }
+  to {
+    background-color: brown;
+    padding: 0.5rem 0;
+  }
+}

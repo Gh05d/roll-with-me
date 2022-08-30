@@ -33,22 +33,22 @@ const DiffrollSetup = props => {
                 title={`Remove ${player.name}`}
                 onClick={() => removePlayer(player.id)}
                 aria-label={`Remove ${player.name}`}
-                className="icon-button">
+                className="icon-button remove-player">
                 <i className="fa fa-user-minus" />
-              </button>
-            )}
-
-            {i + 1 == playersArray.length && (
-              <button
-                title="Add player"
-                onClick={addPlayer}
-                aria-label="Add player"
-                className="icon-button">
-                <i className="fa fa-user-plus" />
               </button>
             )}
           </li>
         ))}
+
+        <li>
+          <button
+            title="Add player"
+            onClick={addPlayer}
+            aria-label="Add player"
+            className="icon-button">
+            <i className="fa fa-user-plus" />
+          </button>
+        </li>
       </ul>
 
       <div className="numbers">
@@ -71,6 +71,15 @@ const DiffrollSetup = props => {
           onChange={e => props.setMaxNumber(e.target.value)}
         />
       </div>
+
+      <label>
+        <input
+          type="checkbox"
+          checked={props.automatic}
+          onChange={() => props.toggleMode(state => !state)}
+        />
+        Automatic rolls
+      </label>
 
       <div className="buttons">
         <button
