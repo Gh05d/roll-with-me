@@ -8,6 +8,7 @@ body {
 
 :root {
   --background-color: #ca9d9d;
+  --animation-duration: 600ms;
 }
 
 #root {
@@ -139,4 +140,19 @@ input:focus {
     background-color: brown;
     padding: 0.5rem 0;
   }
+}
+
+.range-slider {
+  display: flex;
+  flex-direction: column;
+}
+
+.range-slider input[type="range"] {
+  outline: 0;
+}
+
+.range-slider > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

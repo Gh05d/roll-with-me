@@ -52,24 +52,31 @@ const DiffrollSetup = props => {
       </ul>
 
       <div className="numbers">
-        <input
-          title="Min number"
-          aria-label="Min number"
-          step={1}
-          type="number"
-          min={1}
-          value={minNumber}
-          onChange={e => props.setMinNumber(e.target.value)}
-        />
-        <input
-          title="Max number"
-          aria-label="Max number"
-          step={10}
-          type="number"
-          min={minNumber}
-          value={props.maxNumber}
-          onChange={e => props.setMaxNumber(e.target.value)}
-        />
+        <label>
+          <span>Min roll</span>
+          <input
+            title="Min number"
+            aria-label="Min number"
+            step={1}
+            type="number"
+            min={1}
+            value={minNumber}
+            onChange={e => props.setMinNumber(e.target.value)}
+          />
+        </label>
+
+        <label>
+          <span>Max roll</span>
+          <input
+            title="Max number"
+            aria-label="Max number"
+            step={10}
+            type="number"
+            min={minNumber}
+            value={props.maxNumber}
+            onChange={e => props.setMaxNumber(e.target.value)}
+          />
+        </label>
       </div>
 
       <label>
@@ -80,6 +87,30 @@ const DiffrollSetup = props => {
         />
         Automatic rolls
       </label>
+
+      <div className="range-slider">
+        <label htmlFor="diffroll-duration">Roll duration</label>
+
+        <div>
+          <input
+            id="diffroll-duration"
+            list="tickmarks"
+            type="range"
+            min="0"
+            max="5000"
+            value={props.animationDuration}
+            step="1"
+            onChange={props.handleRangeChange}
+          />
+          <span>{props.animationDuration} ms</span>
+        </div>
+
+        <datalist id="tickmarks">
+          <option value="0" label="0s"></option>
+          <option value="2500" label="2,5s"></option>
+          <option value="5000" label="5s"></option>
+        </datalist>
+      </div>
 
       <div className="buttons">
         <button

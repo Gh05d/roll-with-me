@@ -19,6 +19,7 @@ const Diffroll = () => {
   const [minNumber, setMinNumber] = React.useState(DEFAULT_MIN);
   const [maxNumber, setMaxNumber] = React.useState(DEFAULT_MAX);
   const [automatic, toggleMode] = React.useState(false);
+  const [animationDuration, setAnimationDuration] = React.useState(600);
 
   const [started, toggle] = React.useState(false);
   const [showDecision, toggleDecision] = React.useState(false);
@@ -28,9 +29,14 @@ const Diffroll = () => {
   const [results, setResults] = React.useState(null);
   const [deletePlayerByID, toggleDeletion] = React.useState(null);
 
-  const animationDuration = 100;
+  React.useEffect(() => {
+    setDefaultPlayers();
+    const duration = getComputedStyle(document.documentElement)?.getPropertyValue(
+      "--animation-duration"
+    );
 
-  React.useEffect(setDefaultPlayers, []);
+    if (duration) setAnimationDuration(+duration.split("ms")[0]);
+  }, []);
 
   function startGame() {
     const playersArray = Object.values(players);
@@ -135,6 +141,12 @@ const Diffroll = () => {
   const closeDeleteModal = () => toggleDeletion(null);
   const closeResetModal = () => toggleReset(null);
 
+  function setDuration(e) {
+    const duration = e.target.value;
+    setAnimationDuration(+duration);
+    document.documentElement?.style?.setProperty("--animation-duration", duration + "ms");
+  }
+
   function setDefaultPlayers() {
     setPlayers(() => {
       const id1 = generateID();
@@ -181,6 +193,8 @@ const Diffroll = () => {
           )
         ) : (
           <DiffrollSetup
+            handleRangeChange={setDuration}
+            animationDuration={animationDuration}
             toggleMode={toggleMode}
             automatic={automatic}
             players={players}
