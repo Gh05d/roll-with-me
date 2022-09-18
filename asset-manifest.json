@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/roll-with-me/static/css/main.cf5e4b7b.css",
-    "main.js": "/roll-with-me/static/js/main.e80d0c48.js",
+    "main.css": "/roll-with-me/static/css/main.64ecea52.css",
+    "main.js": "/roll-with-me/static/js/main.89579dbd.js",
     "static/media/rollwithme-logo.png": "/roll-with-me/static/media/rollwithme-logo.9143498e3d64bc1523f6.png",
     "static/media/win.png": "/roll-with-me/static/media/win.2c335658356e2ab1c39b.png",
     "static/media/skull-large.png": "/roll-with-me/static/media/skull-large.77187ee8c2d62b825831.png",
     "index.html": "/roll-with-me/index.html",
-    "main.cf5e4b7b.css.map": "/roll-with-me/static/css/main.cf5e4b7b.css.map",
-    "main.e80d0c48.js.map": "/roll-with-me/static/js/main.e80d0c48.js.map"
+    "main.64ecea52.css.map": "/roll-with-me/static/css/main.64ecea52.css.map",
+    "main.89579dbd.js.map": "/roll-with-me/static/js/main.89579dbd.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf5e4b7b.css",
-    "static/js/main.e80d0c48.js"
+    "static/css/main.64ecea52.css",
+    "static/js/main.89579dbd.js"
   ]
 }
