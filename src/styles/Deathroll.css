@@ -9,16 +9,37 @@
   position: relative;
 }
 
-.player-data {
+#deathroll h2 {
+  margin-top: 1rem;
+}
+
+.deathroll-players {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+}
+
+.player-data {
+  display: grid;
+  grid-template-areas:
+    "name name name remove"
+    "rolls rolls rolls rolls";
   gap: 16px;
+  box-shadow: 4px 4px 5px 0px rgba(202, 157, 157, 0.75);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+}
+
+.player-data > input {
+  grid-area: name;
+}
+
+#deathroll .players-data > button {
+  grid-area: remove;
 }
 
 .player-data > div {
-  width: 100%;
+  grid-area: rolls;
+  max-width: 17rem;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -41,7 +62,8 @@
 
 .result > span:first-of-type {
   flex: 1;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .result > span:last-of-type {

@@ -13,6 +13,12 @@
   gap: 1rem;
 }
 
+.players > li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .numbers {
   flex: 0;
 }
@@ -25,12 +31,6 @@
 .numbers > label > span {
   font-size: 0.8rem;
   margin-bottom: 0.3rem;
-}
-
-.players > li {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 #diffroll-setup .players .remove-player {
